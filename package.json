@@ -1,0 +1,12 @@
+{
+  "name": "taskflow-workspace",
+  "version": "1.0.0",
+  "description": "TaskFlow - Full Stack Task Management Dashboard",
+  "private": true,
+  "scripts": {
+    "dev:backend": "cd backend && npm start",
+    "dev:client": "cd client && npm run dev",
+    "test:api": "cd backend && node test-suite.js",
+    "build:client": "cd client && npm run build"
+  }
+}
