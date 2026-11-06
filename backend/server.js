@@ -27,6 +27,11 @@ app.use((req, res, next) => {
   next();
 });
 
+// Root status endpoint
+app.get('/', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'TaskFlow API Backend is live' });
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'TaskFlow API is running' });

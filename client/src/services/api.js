@@ -8,7 +8,7 @@ const apiClient = axios.create({
   headers: {
     'Content-Type': 'application/json'
   },
-  timeout: 10000
+  timeout: 60000 // 60s timeout to handle free-tier cloud host cold starts (e.g. Render)
 });
 
 export const getTasks = async () => {
