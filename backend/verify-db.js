@@ -1,5 +1,13 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import dns from 'dns';
+
+// Fix for Windows Node.js querySrv DNS bug by setting reliable DNS servers
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1']);
+} catch {
+  // Ignore if cannot set servers
+}
 
 dotenv.config();
 
@@ -24,9 +32,10 @@ async function verifyConnection() {
     await mongoose.disconnect();
     process.exit(0);
   } catch (error) {
+    const sanitizedMsg = error.message.replace(/mongodb(\+srv)?:\/\/[^@]+@/gi, 'mongodb+srv://***:***@');
     console.error('----------------------------------------------------');
     console.error('STATUS: Connection FAILED');
-    console.error(`Reason: ${error.message}`);
+    console.error(`Reason: ${sanitizedMsg}`);
     console.log('----------------------------------------------------');
     process.exit(1);
   }
